@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valor Posicional - Página de Inicio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Orbitron, Rajdhani, Share Tech Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Fuentes Futuristas */
+        .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
+        }
+        .font-rajdhani {
+            font-family: 'Rajdhani', sans-serif;
+        }
+        .font-mono-tech {
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        /* Fondo principal con imagen externa 'fondo.jpg', capa cyberpunk y rejilla neón */
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            color: #00f3ff;
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #030712;
+            background-image: 
+                radial-gradient(circle at 50% 30%, rgba(138, 43, 226, 0.25) 0%, rgba(5, 10, 25, 0.92) 80%),
+                linear-gradient(180deg, rgba(3, 7, 18, 0.85) 0%, rgba(0, 243, 255, 0.05) 50%, rgba(3, 7, 18, 0.95) 100%),
+                url('fondo.jpg');
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        /* Rejilla Neón de Fondo Sci-Fi */
+        .cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(to right, rgba(0, 243, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
+            background-size: 32px 32px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Efecto de líneas de escaneo de monitor HUD */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0),
+                rgba(255,255,255,0) 50%,
+                rgba(0, 0, 0, 0.3) 50%,
+                rgba(0, 0, 0, 0.3)
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 2;
+            opacity: 0.6;
+        }
+
+        /* Efecto Neón Cyan y Magenta Holográfico para el Título */
+        .neon-title-glow {
+            color: #ffffff;
+            text-shadow: 
+                0 0 5px #00f3ff,
+                0 0 10px #00f3ff,
+                0 0 20px #00f3ff,
+                0 0 40px #b026ff,
+                0 0 80px #b026ff;
+        }
+
+        .neon-cyan-text {
+            color: #00f3ff;
+            text-shadow: 0 0 8px rgba(0, 243, 255, 0.8);
+        }
+
+        .neon-magenta-text {
+            color: #ff007f;
+            text-shadow: 0 0 8px rgba(255, 0, 127, 0.8);
+        }
+
+        /* Botones futuristas con esquinas cortadas en diagonal (Cyber Cut) */
+        .cyber-button {
+            position: relative;
+            background: rgba(8, 20, 42, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid #00f3ff;
+            clip-path: polygon(
+                16px 0, 
+                100% 0, 
+                100% calc(100% - 16px), 
+                calc(100% - 16px) 100%, 
+                0 100%, 
+                0 16px
+            );
+            box-shadow: 
+                inset 0 0 15px rgba(0, 243, 255, 0.15),
+                0 0 15px rgba(0, 0, 0, 0.8);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .cyber-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: #00f3ff;
+            box-shadow: 0 0 10px #00f3ff;
+        }
+
+        /* Variación magenta para segundo botón */
+        .cyber-button-magenta {
+            border-color: #ff007f;
+            box-shadow: 
+                inset 0 0 15px rgba(255, 0, 127, 0.15),
+                0 0 15px rgba(0, 0, 0, 0.8);
+        }
+
+        .cyber-button-magenta::before {
+            background: #ff007f;
+            box-shadow: 0 0 10px #ff007f;
+        }
+
+        /* Interacción Hover Futurista */
+        .cyber-button:hover {
+            transform: translateY(-4px) scale(1.02);
+            background: rgba(12, 35, 70, 0.95);
+            border-color: #00ffff;
+            box-shadow: 
+                inset 0 0 25px rgba(0, 243, 255, 0.35),
+                0 0 25px rgba(0, 243, 255, 0.6);
+        }
+
+        .cyber-button-magenta:hover {
+            background: rgba(45, 10, 40, 0.95);
+            border-color: #ff3399;
+            box-shadow: 
+                inset 0 0 25px rgba(255, 0, 127, 0.35),
+                0 0 25px rgba(255, 0, 127, 0.6);
+        }
+
+        .cyber-button:hover .glow-icon {
+            transform: scale(1.12);
+            filter: drop-shadow(0 0 10px #00f3ff);
+        }
+
+        .cyber-button-magenta:hover .glow-icon {
+            filter: drop-shadow(0 0 10px #ff007f);
+        }
+
+        /* Marco estricto con relación de aspecto 18:9 vertical */
+        .frame-18-9 {
+            width: 100%;
+            max-width: 460px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        @media (min-width: 640px) {
+            .frame-18-9 {
+                min-height: 860px;
+                max-height: 940px;
+                height: 95vh;
+                aspect-ratio: 9 / 18;
+                border: 2px solid rgba(0, 243, 255, 0.5);
+                border-radius: 20px;
+                background: rgba(5, 12, 28, 0.7);
+                backdrop-filter: blur(10px);
+                box-shadow: 
+                    0 0 0 1px rgba(176, 38, 255, 0.3),
+                    inset 0 0 30px rgba(0, 243, 255, 0.1),
+                    0 0 50px rgba(0, 0, 0, 0.9),
+                    0 0 30px rgba(0, 243, 255, 0.25);
+                margin: auto;
+                position: relative;
+            }
+
+            /* Esquinas HUD en el marco principal */
+            .frame-18-9::after {
+                content: '';
+                position: absolute;
+                inset: -6px;
+                border: 2px solid transparent;
+                border-top-color: #00f3ff;
+                border-bottom-color: #ff007f;
+                border-radius: 24px;
+                pointer-events: none;
+                opacity: 0.7;
+            }
+        }
+
+        /* Layer superior para priorizar interacción */
+        .content-layer {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Animation para parpadeo de datos HUD */
+        @keyframes hudBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .hud-blink {
+            animation: hudBlink 2s infinite;
+        }
+    </style>
+</head>
+<body class="select-none flex justify-center items-center min-h-screen py-0 sm:py-4">
+
+    <!-- Elemento de Audio Externo -->
+    <audio id="musica-fondo" src="musica.mp3" preload="auto" loop></audio>
+
+    <!-- Rejilla Cyberpunk y Scanlines -->
+    <div class="cyber-grid"></div>
+    <div class="scanlines"></div>
+
+    <!-- Canvas de partículas con números y unidades del valor posicional (U, D, C, UM, 1, 10, 100, 1000) -->
+    <canvas id="matrix-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0"></canvas>
+
+    <!-- MARCO CONTENEDOR FUTURISTA CON FORMATO 18:9 VERTICAL -->
+    <div class="content-layer frame-18-9 px-5 py-6 sm:py-8 overflow-y-auto">
+
+        <!-- CABECERA SUPERIOR HUD / ETIQUETA VALOR POSICIONAL -->
+        <header class="w-full text-center mt-1 sm:mt-2">
+            
+            <!-- Etiqueta / Distintivo Superior Requerido: VALOR POSICIONAL -->
+            <div class="inline-flex items-center gap-2 px-3 py-1 bg-cyan-950/80 border border-cyan-400/60 rounded-full mb-3 shadow-[0_0_12px_rgba(0,243,255,0.3)]">
+                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                <span class="font-mono-tech text-[11px] sm:text-xs tracking-[0.25em] text-cyan-300 font-bold uppercase">
+                    VALOR POSICIONAL
+                </span>
+                <span class="text-xs text-purple-400 font-mono">[V2.6]</span>
+            </div>
+
+            <!-- TÍTULO PRINCIPAL REQUERIDO -->
+            <h1 class="font-orbitron text-3xl sm:text-4xl font-black tracking-wider leading-tight neon-title-glow my-2 uppercase">
+                ¿DÓNDE JUGAMOS HOY?
+            </h1>
+
+            <!-- Subtítulo e indicadores posicionales -->
+            <p class="font-rajdhani text-sm sm:text-base text-cyan-200/90 font-semibold tracking-widest mt-1">
+                SISTEMA DE UNIDADES • DECENAS • CENTENAS
+            </p>
+
+            <!-- Barra de estado decorativa HUD -->
+            <div class="flex items-center justify-center gap-3 my-3 text-[10px] font-mono-tech text-cyan-400/70">
+                <span>[ U: 1 ]</span>
+                <span class="text-purple-400">•</span>
+                <span>[ D: 10 ]</span>
+                <span class="text-purple-400">•</span>
+                <span>[ C: 100 ]</span>
+                <span class="text-purple-400">•</span>
+                <span>[ UM: 1000 ]</span>
+            </div>
+        </header>
+
+        <!-- SECCIÓN DE BOTONES (PRIMERO "COMENZAR", LUEGO MODOS DE JUEGO) -->
+        <main class="w-full my-auto py-4">
+            
+            <!-- BOTÓN INICIAL: COMENZAR -->
+            <button id="btn-comenzar" 
+                    type="button"
+                    class="cyber-button group rounded-lg p-5 sm:p-6 flex flex-col items-center justify-center text-center cursor-pointer transform active:scale-95 w-full">
+                
+                <!-- Indicadores de esquina HUD -->
+                <div class="absolute top-2 right-3 font-mono-tech text-[10px] tracking-widest text-cyan-400/80">
+                    SYS://AUDIO_START
+                </div>
+
+                <!-- Icono Futurista de Play -->
+                <div class="glow-icon mb-2 text-cyan-400 transition-transform duration-300">
+                    <svg class="w-12 h-12 sm:w-14 sm:h-14 filter drop-shadow-[0_0_8px_rgba(0,243,255,0.8)]" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 5v14l11-7z"></path>
+                    </svg>
+                </div>
+
+                <!-- Texto Principal del Botón Comenzar -->
+                <span class="font-orbitron text-xl sm:text-2xl font-black tracking-widest text-white group-hover:text-cyan-300 uppercase mb-1">
+                    COMENZAR
+                </span>
+
+                <div class="w-24 h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent my-1"></div>
+
+                <!-- Detalle Técnico -->
+                <p class="font-mono-tech text-xs text-cyan-200/80 mt-1">
+                    INICIAR INTERFAZ
+                </p>
+
+                <!-- Etiqueta Cyberpunk de Acción -->
+                <span class="mt-3 inline-flex items-center gap-2 px-4 py-1.5 rounded border border-cyan-400/50 bg-cyan-950/60 text-cyan-300 text-[11px] font-mono-tech font-bold tracking-widest uppercase group-hover:bg-cyan-500 group-hover:text-black transition-colors duration-300">
+                    <span>ENTRAR AL SISTEMA</span>
+                    <span>&gt;&gt;</span>
+                </span>
+            </button>
+
+            <!-- CONTENEDOR DE MODOS DE JUEGO (OCULTO HASTA PULSAR COMENZAR) -->
+            <div id="modos-juego" class="hidden flex flex-col gap-5 sm:gap-6 w-full">
+
+                <!-- BOTÓN 1: EN ORDENADOR -->
+                <a href="modopc.html" 
+                   id="btn-pc"
+                   class="cyber-button group rounded-lg p-5 sm:p-6 flex flex-col items-center justify-center text-center cursor-pointer transform active:scale-95">
+                    
+                    <!-- Indicadores de esquina HUD -->
+                    <div class="absolute top-2 right-3 font-mono-tech text-[10px] tracking-widest text-cyan-400/80">
+                        SYS://PC_DISPOSITIVO
+                    </div>
+
+                    <!-- Icono Futurista de Ordenador -->
+                    <div class="glow-icon mb-2 text-cyan-400 transition-transform duration-300">
+                        <svg class="w-12 h-12 sm:w-14 sm:h-14 filter drop-shadow-[0_0_8px_rgba(0,243,255,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+
+                    <!-- Texto Principal del Botón 1 -->
+                    <span class="font-orbitron text-xl sm:text-2xl font-black tracking-widest text-white group-hover:text-cyan-300 uppercase mb-1">
+                        EN ORDENADOR
+                    </span>
+
+                    <div class="w-24 h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent my-1"></div>
+
+                    <!-- Detalle Técnico -->
+                    <p class="font-mono-tech text-xs text-cyan-200/80 mt-1">
+                        TECLADO + RATÓN • MODO HD
+                    </p>
+
+                    <!-- Etiqueta Cyberpunk de Acción -->
+                    <span class="mt-3 inline-flex items-center gap-2 px-4 py-1.5 rounded border border-cyan-400/50 bg-cyan-950/60 text-cyan-300 text-[11px] font-mono-tech font-bold tracking-widest uppercase group-hover:bg-cyan-500 group-hover:text-black transition-colors duration-300">
+                        <span>INICIAR INTERFAZ</span>
+                        <span>&gt;&gt;</span>
+                    </span>
+                </a>
+
+                <!-- BOTÓN 2: EN MÓVIL/TABLET -->
+                <a href="modomovil.html" 
+                   id="btn-mobile"
+                   class="cyber-button cyber-button-magenta group rounded-lg p-5 sm:p-6 flex flex-col items-center justify-center text-center cursor-pointer transform active:scale-95">
+                    
+                    <!-- Indicadores de esquina HUD -->
+                    <div class="absolute top-2 right-3 font-mono-tech text-[10px] tracking-widest text-pink-400/80">
+                        SYS://TOUCH_PORTATIL
+                    </div>
+
+                    <!-- Icono Futurista de Móvil / Tablet -->
+                    <div class="glow-icon mb-2 text-pink-500 transition-transform duration-300">
+                        <svg class="w-12 h-12 sm:w-14 sm:h-14 filter drop-shadow-[0_0_8px_rgba(255,0,127,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+
+                    <!-- Texto Principal del Botón 2 -->
+                    <span class="font-orbitron text-xl sm:text-2xl font-black tracking-widest text-white group-hover:text-pink-300 uppercase mb-1">
+                        EN MÓVIL/TABLET
+                    </span>
+
+                    <div class="w-24 h-0.5 bg-gradient-to-r from-transparent via-pink-500 to-transparent my-1"></div>
+
+                    <!-- Detalle Técnico -->
+                    <p class="font-mono-tech text-xs text-pink-200/80 mt-1">
+                        PANTALLA TÁCTIL • OPTIMIZADO
+                    </p>
+
+                    <!-- Etiqueta Cyberpunk de Acción -->
+                    <span class="mt-3 inline-flex items-center gap-2 px-4 py-1.5 rounded border border-pink-500/50 bg-pink-950/60 text-pink-300 text-[11px] font-mono-tech font-bold tracking-widest uppercase group-hover:bg-pink-500 group-hover:text-black transition-colors duration-300">
+                        <span>INICIAR INTERFAZ</span>
+                        <span>&gt;&gt;</span>
+                    </span>
+                </a>
+
+            </div>
+        </main>
+
+        <!-- PIE DE PÁGINA FUTURISTA CON UNIDADES Y ESTADO -->
+        <footer class="w-full text-center pb-1 pt-2">
+            <!-- Bloques interactivos del Valor Posicional -->
+            <div class="grid grid-cols-4 gap-1 sm:gap-2 text-center font-mono-tech text-[10px] sm:text-xs my-2 border-t border-b border-cyan-900/50 py-2">
+                <div class="bg-cyan-950/40 p-1 rounded border border-cyan-800/40">
+                    <span class="block text-cyan-400 font-bold">UM</span>
+                    <span class="text-cyan-200/60">1000</span>
+                </div>
+                <div class="bg-purple-950/40 p-1 rounded border border-purple-800/40">
+                    <span class="block text-purple-400 font-bold">C</span>
+                    <span class="text-purple-200/60">100</span>
+                </div>
+                <div class="bg-pink-950/40 p-1 rounded border border-pink-800/40">
+                    <span class="block text-pink-400 font-bold">D</span>
+                    <span class="text-pink-200/60">10</span>
+                </div>
+                <div class="bg-emerald-950/40 p-1 rounded border border-emerald-800/40">
+                    <span class="block text-emerald-400 font-bold">U</span>
+                    <span class="text-emerald-200/60">1</span>
+                </div>
+            </div>
+
+            <p class="font-mono-tech text-[10px] text-cyan-400/60 tracking-widest hud-blink">
+                CONEXIÓN ESTABLE • SELECCIONA TERMINAL
+            </p>
+        </footer>
+
+    </div>
+
+    <!-- JAVASCRIPT: PARTÍCULAS DIGITALES Y EFECTOS AUDIO FUTURISTAS -->
+    <script>
+        // Canvas de Matrix/Partículas flotantes de Valor Posicional (1, 10, 100, 1000, U, D, C, UM)
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        // Símbolos temáticos de valor posicional
+        const symbols = ['1', '10', '100', '1000', 'U', 'D', 'C', 'UM', 'DM', '10000'];
+
+        class DigitParticle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.text = symbols[Math.floor(Math.random() * symbols.length)];
+                this.size = Math.floor(Math.random() * 12 + 10);
+                this.speedY = -(Math.random() * 0.8 + 0.3); // Flotan hacia arriba
+                this.opacity = Math.random() * 0.6 + 0.2;
+                // Colores alternados entre Cyan neón y Magenta
+                this.color = Math.random() > 0.3 ? '#00f3ff' : '#ff007f';
+            }
+
+            update() {
+                this.y += this.speedY;
+                if (this.y < -20) {
+                    this.y = height + 20;
+                    this.x = Math.random() * width;
+                    this.text = symbols[Math.floor(Math.random() * symbols.length)];
+                }
+            }
+
+            draw() {
+                ctx.font = `${this.size}px 'Share Tech Mono', monospace`;
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = this.opacity;
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = this.color;
+                ctx.fillText(this.text, this.x, this.y);
+                ctx.globalAlpha = 1.0;
+            }
+        }
+
+        const particles = Array.from({ length: 40 }, () => new DigitParticle());
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        window.onload = function() {
+            animate();
+        };
+
+        // Sonido de clic futurista mediante Web Audio API
+        function playSciFiSound() {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return;
+                const audioCtx = new AudioContext();
+
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                osc.type = 'sine';
+                // Tono láser/beeping futurista agudo
+                osc.frequency.setValueAtTime(880, audioCtx.currentTime); // Nota A5
+                osc.frequency.exponentialRampToValueAtTime(220, audioCtx.currentTime + 0.15);
+
+                gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.15);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.15);
+            } catch (e) {
+                // Silencioso en caso de restricciones de autoplay
+            }
+        }
+
+        // Al pulsar COMENZAR: Reproduce audio, oculta el botón inicial y muestra los modos de juego
+        document.getElementById('btn-comenzar').addEventListener('click', function() {
+            playSciFiSound();
+            
+            // Reproducción de música mp3 de fondo
+            const musicaFondo = document.getElementById('musica-fondo');
+            if (musicaFondo) {
+                musicaFondo.play().catch(e => console.log('Error al reproducir audio:', e));
+            }
+
+            // Ocultar el botón COMENZAR
+            this.classList.add('hidden');
+
+            // Mostrar el bloque con las opciones de juego
+            const modosContainer = document.getElementById('modos-juego');
+            if (modosContainer) {
+                modosContainer.classList.remove('hidden');
+            }
+        });
+
+        document.getElementById('btn-pc').addEventListener('click', playSciFiSound);
+        document.getElementById('btn-mobile').addEventListener('click', playSciFiSound);
+    </script>
+</body>
+</html>
